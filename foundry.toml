@@ -2,7 +2,11 @@
 src = 'src'
 out = 'out'
 libs = ['lib']
-[block.timestamp]
+fuzz_runs = 10000
+optimizer = true
+optimizer_runs  = 20000
+via_ir = true
+
 FOUNDRY_BLOCK_TIMESTAMP = 1658167239
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config

@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
-/**
- *  @title: BuidlGuidl Stream Contract
- *  @author: supernova (supernovahs.eth)
- *  @notice: BGstream is a contract that streams Ether to builders on the BuidlGuidl 
- *     
- */
+// /**
+//  *  @title: BuidlGuidl Stream Contract
+//  *  @author: supernova (supernovahs.eth)
+//  *  @notice: BGstream is a contract that streams Ether to builders on the BuidlGuidl 
+//  *     
+//  */
 contract BGstream {
 
     uint public cap; // Max Ether to be withdrawn per frequency
@@ -21,14 +21,14 @@ contract BGstream {
   event Withdraw( address indexed to, uint256 amount, string reason );
   event Deposit( address indexed from, uint256 amount, string reason );
 
-/**
- *  @notice: Set up the contract with the parameters
- *  @param _toAddress: The benfeciary address that can withdraw Ether from the stream
- *  @param _cap: The max amount of Ether that can be withdrawn per frequency
- *  @param _frequency: The frequency of withdrawal in seconds
- *  @param _startsFull: If the stream starts full or empty
- *
- */
+// /**
+//  *  @notice: Set up the contract with the parameters
+//  *  @param _toAddress: The benfeciary address that can withdraw Ether from the stream
+//  *  @param _cap: The max amount of Ether that can be withdrawn per frequency
+//  *  @param _frequency: The frequency of withdrawal in seconds
+//  *  @param _startsFull: If the stream starts full or empty
+//  *
+//  */
     constructor(address payable _toAddress, uint256 _cap, uint64 _frequency, bool _startsFull) {
     toAddress = _toAddress;
     cap = _cap;
@@ -45,10 +45,10 @@ contract BGstream {
     }
   }
 
-  /**
-   * @dev: Get the current balance of the stream
-   * @return uint256: The current balance of the stream
-   */
+//   /**
+//    * @dev: Get the current balance of the stream
+//    * @return uint256: The current balance of the stream
+//    */
 
   function streamBalance() public view returns (uint256 ){
       uint bal;
@@ -68,21 +68,21 @@ contract BGstream {
     return bal;
   }
 
-  /**
-   * @dev: Deposit Ether to the Stream
-   * @param : reason Reason for the deposit (string)
-   */
+//   /**
+//    * @dev: Deposit Ether to the Stream
+//    * @param : reason Reason for the deposit (string)
+//    */
 
-  function streamDeposit(string memory reason) external payable {
+  function streamDeposit(string memory reason) public  payable {
       emit Deposit( msg.sender, msg.value, reason );
    }
 
 
-/**
- * @dev: Withdraw Ether from the Stream
- * @param : amount The amount of Ether to withdraw
- * @param : reason Reason for the withdrawal (string)
- */
+// /**
+//  * @dev: Withdraw Ether from the Stream
+//  * @param : amount The amount of Ether to withdraw
+//  * @param : reason Reason for the withdrawal (string)
+//  */
      function streamWithdraw(uint256 amount, string memory reason) public {
      if(msg.sender != toAddress) revert NotAuthorized();
      uint256 totalAmountCanWithdraw = streamBalance();
@@ -104,9 +104,9 @@ contract BGstream {
      toAddress.transfer(amount);
    }
 
-   /**
-    * @dev: Receive Ether 
-    */
+//    /**
+//     * @dev: Receive Ether 
+//     */
 
     receive() external payable { streamDeposit(""); }
 

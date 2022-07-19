@@ -1,0 +1,3 @@
+ContractTest:teststreambalance() (gas: 15001)
+ContractTest:teststreamdeposit() (gas: 15380)
+ContractTest:teststreamwithdraw() (gas: 33547)
