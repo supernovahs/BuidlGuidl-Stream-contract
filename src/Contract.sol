@@ -88,7 +88,7 @@ contract BGstream {
      uint256 totalAmountCanWithdraw = streamBalance();
      if(totalAmountCanWithdraw<amount) revert NotEnough();
      uint64 _last = last;
-     uint64 _timestamp = uint64(1660897018);
+     uint64 _timestamp = uint64(block.timestamp);
      uint64 _frequency = frequency;
      assembly{
      
