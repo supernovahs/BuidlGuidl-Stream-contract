@@ -2,5 +2,7 @@
 src = 'src'
 out = 'out'
 libs = ['lib']
+[block.timestamp]
+FOUNDRY_BLOCK_TIMESTAMP = 1658167239
 
 # See more config options https://github.com/foundry-rs/foundry/tree/master/config
