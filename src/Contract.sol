@@ -9,10 +9,10 @@ pragma solidity ^0.8.13;
 //  */
 contract BGstream {
 
-    uint public cap; // Max Ether to be withdrawn per frequency
-    address payable public  toAddress; // Beneficiary Builder
-    uint64 public frequency; // Frequency of withdrawal in seconds
-    uint64 public last; // Last time withdrawal was made
+    uint public immutable cap; // Max Ether to be withdrawn per frequency
+    address payable public immutable  toAddress; // Beneficiary Builder
+    uint64 public immutable frequency; // Frequency of withdrawal in seconds
+    uint64 public  last; // Last time withdrawal was made
 
     error NotAuthorized(); 
     error NotEnough();
@@ -99,6 +99,7 @@ contract BGstream {
         _last:= add(_last,div(mul(sub(_timestamp,_last),amount),totalAmountCanWithdraw))
         sstore(last.slot,_last)
      }
+     
 
      emit Withdraw( msg.sender, amount, reason );
      toAddress.transfer(amount);
