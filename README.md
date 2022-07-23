@@ -1,6 +1,6 @@
 # BuidlGuidl-Stream-contract
-Optimized Version of BuidlGuidl Stream contract
 
+Optimized Version of BuidlGuidl Stream contract
 
 ## Run forge tests
 
@@ -9,30 +9,28 @@ forge test --fork-url <RPC URL>  --gas-report
 
 ```
 
-This contract saves a lot of gas that will directly benefit the builders . 
+This contract saves a lot of gas that will directly benefit the builders .
 
- ## Gas Report 
- 
- ###  [Gas Snapshot](https://github.com/supernovahs/BuidlGuidl-Stream-contract/blob/master/.gas-snapshot)
- 
- 
-  Deployment cost | Avg Gas cost
-  ----------------| --------------
-  contract deploy |     385392     |
-  FunctionName    |                |
-    cap           |  301           | 
-    frequency     |  418           |
-    last          |  329           |
-    streamBalance |  2733          |
-    streamDeposit |  2733          |
-    streamWithdraw|  6960          |
-    toAddress     |  256           |
-    
+## Gas Report
 
+### [Gas Snapshot](https://github.com/supernovahs/BuidlGuidl-Stream-contract/blob/master/.gas-snapshot)
 
-## Beware 
+| Deployment cost | Avg Gas cost |
+| --------------- | ------------ |
+| contract deploy | 380263       |
+| FunctionName    |              |
+| cap             | 198          |
+| frequency       | 309          |
+| last            | 829          |
+| streamBalance   | 1506         |
+| streamDeposit   | 3070         |
+| streamWithdraw  | 6629         |
+| toAddress       | 156          |
+
+## Beware
+
 ```
-The contract is not audited, use at your own risk. Supernovahs will not be responsible for any theft or loss of funds. 
+The contract is not audited, use at your own risk. Supernovahs will not be responsible for any theft or loss of funds.
 DYOR.
 ```
 

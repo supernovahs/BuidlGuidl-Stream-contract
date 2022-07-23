@@ -52,17 +52,16 @@ contract BGstream {
 
   function streamBalance() public view returns (uint256 ){
       uint bal;
-      uint64 _timestamp = uint64(block.timestamp);
       uint64 _last = last;
       uint64 _frequency = frequency;
       uint _cap = cap;
       assembly{
-          switch gt(sub(_timestamp,_last),_frequency)
+          switch gt(sub(timestamp(),_last),_frequency)
     case 1{
         bal:= _cap
     }
     case 0 {
-        bal:= div(mul(_cap,sub(_timestamp,_last)),_frequency)
+        bal:= div(mul(_cap,sub(timestamp(),_last)),_frequency)
     }
         }
     return bal;
@@ -100,7 +99,6 @@ contract BGstream {
         sstore(last.slot,_last)
      }
      
-
      emit Withdraw( msg.sender, amount, reason );
      toAddress.transfer(amount);
    }
