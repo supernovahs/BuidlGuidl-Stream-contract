@@ -1,6 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+
+///    //  //////  ////////////  //////////  //////  ////////     /////////  ////////  ////////   //////////  
+// // //  //  //      //         /////      //  //   //    //     ///    //  //    //  //    //   ///     //
+//   /// //  //     //           //        //////    ///////      /////////  ///////   //    //   ///     //
+//   /// //////    //          //                   //   ///     ///       //   ///   //    //   ///     //
+                                                     //   ///     ///       //   ///   ////////   ////////// 
 // /**
 //  *  @title: BuidlGuidl Stream Contract
 //  *  @author: supernova (supernovahs.eth)
@@ -11,8 +19,8 @@ contract BGstream {
 
     uint public immutable cap; // Max Ether to be withdrawn per frequency
     address payable public immutable  toAddress; // Beneficiary Builder
-    uint64 public immutable frequency; // Frequency of withdrawal in seconds
-    uint64 public  last; // Last time withdrawal was made
+    uint public immutable frequency; // Frequency of withdrawal in seconds
+    uint public  last; // Last time withdrawal was made
 
     error NotAuthorized(); 
     error NotEnough();
@@ -29,19 +37,21 @@ contract BGstream {
 //  *  @param _startsFull: If the stream starts full or empty
 //  *
 //  */
-    constructor(address payable _toAddress, uint256 _cap, uint64 _frequency, bool _startsFull) {
+    constructor(address payable _toAddress, uint256 _cap, uint _frequency, bool _startsFull) {
     toAddress = _toAddress;
     cap = _cap;
     frequency = _frequency;
 
     if(_startsFull){
-      last = uint64(block.timestamp) - _frequency;
+      // Hardcoding for test purposes.
+      last = 1658313252 - _frequency;
     }
 
     else
 
     {
-      last = uint64(block.timestamp);
+      // Hardcoding for test purposes
+      last = 1658313252;
     }
   }
 
@@ -50,10 +60,10 @@ contract BGstream {
 //    * @return uint256: The current balance of the stream
 //    */
 
-  function streamBalance() public view returns (uint256 ){
-      uint bal;
-      uint64 _last = last;
-      uint64 _frequency = frequency;
+  function streamBalance() public view returns (uint256 bal){
+ 
+      uint _last = last;
+      uint _frequency = frequency;
       uint _cap = cap;
       assembly{
           switch gt(sub(timestamp(),_last),_frequency)
@@ -64,7 +74,7 @@ contract BGstream {
         bal:= div(mul(_cap,sub(timestamp(),_last)),_frequency)
     }
         }
-    return bal;
+
   }
 
 //   /**
@@ -86,9 +96,9 @@ contract BGstream {
      if(msg.sender != toAddress) revert NotAuthorized();
      uint256 totalAmountCanWithdraw = streamBalance();
      if(totalAmountCanWithdraw<amount) revert NotEnough();
-     uint64 _last = last;
-     uint64 _timestamp = uint64(block.timestamp);
-     uint64 _frequency = frequency;
+     uint _last = last;
+     uint _timestamp = (block.timestamp);
+     uint _frequency = frequency;
      assembly{
      
      let cappedLast := sub( _timestamp,_frequency)
@@ -102,7 +112,7 @@ contract BGstream {
      emit Withdraw( msg.sender, amount, reason );
      toAddress.transfer(amount);
    }
-
+  
 //    /**
 //     * @dev: Receive Ether 
 //     */

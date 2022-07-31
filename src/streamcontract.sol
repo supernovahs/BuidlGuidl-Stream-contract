@@ -32,28 +32,28 @@ contract original {
     cap = _cap;
     frequency = _frequency;
     if(_startsFull){
-      last = 1658218618 - frequency;
+      last = block.timestamp - frequency;
     }else{
-      last = 1658218618;
+      last = block.timestamp;
     }
   }
 
   function streamBalance() public view returns (uint256){
-    if(1660897018-last > frequency){
+    if(block.timestamp-last > frequency){
       return cap;
     }
-    return (cap * (1660897018-last)) / frequency;
+    return (cap * (block.timestamp-last)) / frequency;
   }
 
   function streamWithdraw(uint256 amount, string memory reason) public {
      require(msg.sender==toAddress,"this stream is not for you");
      uint256 totalAmountCanWithdraw = streamBalance();
      require(totalAmountCanWithdraw>=amount,"not enough in the stream");
-     uint256 cappedLast = 1660897018-frequency;
+     uint256 cappedLast = block.timestamp-frequency;
      if(last<cappedLast){
        last = cappedLast;
      }
-     last = last + ((1660897018 - last) * amount / totalAmountCanWithdraw);
+     last = last + ((block.timestamp - last) * amount / totalAmountCanWithdraw);
      emit Withdraw( msg.sender, amount, reason );
      toAddress.transfer(amount);
    }
