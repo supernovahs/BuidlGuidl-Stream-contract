@@ -5,7 +5,7 @@ Optimized Version of BuidlGuidl Stream contract
 ## Run forge tests
 
 ```
-forge test --fork-url <RPC URL>  --gas-report
+forge test  --gas-report
 
 ```
 
